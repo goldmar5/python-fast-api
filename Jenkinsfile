@@ -35,7 +35,7 @@ pipeline {
         withCredentials([
             string(credentialsId: 'kubernetes')
             ]) {
-             sh 'kubectl apply -f .\deploymentservice.yaml'
+             sh 'kubectl apply -f deploymentservice.yaml'
                }
             }
         }
