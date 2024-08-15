@@ -9,12 +9,6 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        git branch: 'main', url: 'https://github.com/goldmar5/python-fast-api.git'
-      }
-    }
-
     stage('Build image') {
       steps{
         script {
