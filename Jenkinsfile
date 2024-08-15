@@ -35,7 +35,7 @@ pipeline {
         withCredentials([
             string(credentialsId: 'kubernetes')
             ]) {
-             sh 'kubectl --server https://127.0.0.1:51731 --insecure-skip-tls-verify=true apply -f deploymentservice.yaml'
+             sh 'kubectl apply -f .\deploymentservice.yaml'
                }
             }
         }
