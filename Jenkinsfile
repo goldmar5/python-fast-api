@@ -32,13 +32,11 @@ pipeline {
     
     stage('Deploy App on k8s') {
       steps {
-        withCredentials([
-            string(credentialsId: 'kubernetes')
-            ]) {
+        script {
              sh 'kubectl apply -f deploymentservice.yaml'
-               }
-            }
         }
+      }
+    }
 
     stage('Deploying App to Kubernetes') {
       steps {
