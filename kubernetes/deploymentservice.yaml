@@ -27,7 +27,7 @@ spec:
             memory: 400Mi
         env:
         - name: ENV
-          value: "YURAS"
+          value: "YURASSS"
 
 ---
 apiVersion: v1
