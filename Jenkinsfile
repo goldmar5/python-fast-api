@@ -18,7 +18,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build dockerimagename
+          dockerImage = docker.build("${dockerimagename}:${env.BUILD_ID}") 
         }
       }
     }
@@ -35,14 +35,23 @@ pipeline {
         }
       }
     }
+    
+    stage('Deploy App on k8s') {
+      steps {
+        withCredentials([
+            string(credentialsId: 'kubernetes')
+            ]) {
+             sh 'kubectl --server https://127.0.0.1:51731 --insecure-skip-tls-verify=true apply -f deploymentservice.yaml'
+               }
+            }
+        }
 
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploymentservice.yaml", kubeconfigId: "kubernetes")
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
         }
       }
     }
   }
 }
-
